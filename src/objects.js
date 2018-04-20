@@ -15,64 +15,58 @@ $( function() {			// initialisation JQuery
 			this.inputable = inputable;
 			this.clue = clue;
 			this.message = message;
-			this.isInInventory = false;
+			this.width = this.dom.width();
+			this.height = this.dom.height();
+			this.inBag();
 			// this.left = this.dom.offset().left;
 			// this.top = this.dom.offset().top;
 
 		},
 
 		inBag: function () {
-
-			this.isInInventory = true;
-			var thisdom = this.dom;
-			var thisname = this.name;
-			this.width = thisdom.width();
-			this.height = thisdom.height();
-
-			thisdom.mouseup(function() {
-			    if ( thisdom.offset().left > ($(window).width() - $('#inventory').width()) ) {
-					inventory.push(thisname);
-					thisdom.addClass('slot');
-					thisdom.removeClass('element');
-					thisdom.css('left', 1435 + "px");
-			    }
-			});
-		},
-
-		inScene: function() {
-			this.isInInventory = false;
 			var thisdom = this.dom;
 			var thisname = this.name;
 			var thiswidth = this.width;
-			var thisheight = thisdom.height;
+			var thisheight = this.height;
+			var isInBag = false;
 
-			addEvents(thisname);
-
-			thisdom.mouseup(function() {
-			    if ( thisdom.offset().left < (1000 - thisdom.width()) ) {
+			thisdom.on ('mouseup', function() {
+			    if( (isInBag == false) && ( thisdom.offset().left > ($('main').width() - $('#inventory').width()) ) ){
+			    	this.isInInventory = true;
+					inventory.push(thisname);
+					thisdom.addClass('slot');
+					thisdom.removeClass('element');
+					thisdom.css('left', 1586 + "px");
+					isInBag = true;
+			    }
+			    else if ( (isInBag == true) && ( thisdom.offset().left < (($('main').width() - $('#inventory').width())) ) ){
+					this.isInInventory = false;
+					thisdom.removeClass('slot');
 					var index = inventory.indexOf(thisname);
 					if (index > -1) {
-						array.splice(index, 1);
+						inventory.splice(index, 1);
 					}
-					thisdom.removeClass('slot');
 					thisdom.addClass('element');
-					thisdom.width = thiswidth;
-					thisdom.height = thisheight;
+					isInBag = false;
 			    }
 			});
 		},
 
-		events: function() {
-			addEvents(this.name);
-			if (this.movable) {
-				if (this.isInInventory == true) {
-					this.inScene();
+		shiftPlace: function() {
+			var thisdom = this.dom;
+				if (this.movable) {
+
+					if (this.isInInventory == true) {
+						thisdom.inScene();
+						console.log('inScene');
+					}
+					else {
+						this.inBag();
+						console.log('inBag');
+					}
 				}
-				else {
-					this.inBag();
-				}
-			}
-		},
+			},
+
 
         //tentative de fonction de zoom
         zoom: function () {
@@ -111,66 +105,91 @@ $( function() {			// initialisation JQuery
         }
 
 	};
+	
 
-	var tortue = Object.create(Element);
+	// Objets de la 1ère pièce
+	var apple = Object.create(Element);
+	apple.init('apple', 'img/apple.svg', false, false, false, false, "", "Ceci est une pomme", false);
+	
+	var banana = Object.create(Element);
+	banana.init('banana', 'img/banana.svg', false, false, false, false, "", "Ceci est une banane", false);
+		
+	var battery = Object.create(Element);
+	battery.init('battery', 'img/battery.svg', true, true, false, true, "", "A quoi ces piles pourraient-elles bien me servir?", false);
 
-	tortue.init('tortue', 'img/tortue.png', true, true, true, false, false, 'une tortue !', 'initiales');
-	// tortue.imgSize();
-	tortue.events();
+	var blocked = Object.create(Element);
+	blocked.init('battery', 'img/blocked.svg', false, true, false, false, "", "Il me manque une clé pour ouvrir ce cadenas", false);
+
+	var bookshelf = Object.create(Element);
+	bookshelf.init('bookshelf', 'img/bookshelf.svg', false, false, true, false, "", "oh, une carte Michelin!", false);
+
+	var bowl = Object.create(Element);
+	bowl.init('bowl', 'img/bowl.svg', false, false, false, false, "", "Ceci est un bol", false);
+
+	var candle = Object.create(Element);
+	candle.init('candle', 'img/candle.svg', false, true, false, false, "", "Il me faut quelque chose pour allumer cette bougie", false);
+
+	var candleOff = Object.create(Element);
+	candleOff.init('candleOff', 'img/candleOff.svg', false, false, false, false, "", "Quelque chose apparaît", false);
 
 	var cheese = Object.create(Element);
+	cheese.init('cheese', 'img/cheese.svg', true, true, false, true, "", "A quoi ce fromage pourrait-il bien me servir?", false);
 
-	cheese.init('cheese', 'img/cheese.jpg', true, true, true, false, false, 'du fromage', 'initiales');
-	// cheese.imgSize();
-	cheese.events();
+	var cigarette = Object.create(Element);
+	cigarette.init('cigarette', 'img/cigarette.svg', true, true, false, true, "", "Des cigarettes", false);
 
-	function addEvents(element) {
-		var dom = $("#" + element); 
-		dom.on( "mouseup", function() {
-			shiftPlace(element);
-		} );
+	var coffeeMaker = Object.create(Element);
+	coffeeMaker.init('cigarette', 'img/coffee-maker.svg', false, false, false, false, "", "Une simple cafetière", false);
 
-		// element.dom.on( "mouseup", function() {
-		// 	element.shiftPlace();
-		// } );
-	}
+	var compteur = Object.create(Element);
+	compteur.init('compteur', 'img/compteur.png', false, true, true, false, "", "Il manque quelque chose pour faire fonctionner l'ascenseur", false);
 
-	function shiftPlace: () {
-			console.log(shiftPlace);
-			if (this.movable) {
-				if (this.isInInventory == true) {
-					this.inScene();
-					console.log('inScene');
-				}
-				else {
-					this.inBag();
-					console.log('inBag');
-				}
-			}
-		},
+	var compteurrempli = Object.create(Element);
+	compteurrempli.init('compteurrempli', 'img/compteurrempli.png', false, true, true, false, "", "Ca devrait fonctionner!", false);
 
-	// if (cheese.movable) {
-	// 	if (cheese.isInInventory == true) {
-	// 		cheese.inScene();
-	// 	}
-	// 	else {
-	// 		cheese.inBag();
-	// 	}
-	// }
+	var elevator = Object.create(Element);
+	elevator.init('elevator', 'img/elevator.svg', false, false, false, false, "", "Il manque quelque chose pour faire fonctionner l'ascenseur", false);
 
+	var france = Object.create(Element);
+	france.init('france', 'img/france.svg', false, false, true, false, "", "Deux villes sont entourées sur la carte: Limoges et Bourges", false);
 
-	// if (tortue.movable) {
-	// 	if (tortue.isInInventory == true) {
-	// 		tortue.inScene();
-	// 	}
-	// 	else {
-	// 		tortue.inBag();
-	// 	}
-	// }
+	var fridge = Object.create(Element);
+	fridge.init('fridge', 'img/fridge.svg', false, false, false, false, "", "Il y a un cadenas sur ce frigo", false);
 
+	var fuse = Object.create(Element);
+	fuse.init('fuse', 'img/fuse.svg', true, true, false, true, "", "A quoi ce fusile pourrait-il bien me servir?", false);
+	
+	var gun = Object.create(Element);
+	gun.init('fuse', 'img/gun.svg', true, true, false, false, "", "Un pistolet", false);
 
-	// $().on('click', function () {
-	// 	$( ".draggable" ).draggable();
-	// });
+	// Objets de la 2ème pièce
+	var axe = Object.create(Element);
+	axe.init('axe', 'img/axe.svg', false, false, false, false, "", "Cette hache est verouillée sous un cadenas à 4 chiffres", false);
+	
+	var blueCircle = Object.create(Element);
+	blueCircle.init('blueCircle', 'img/blue-circle.svg', true, true, false, false, "", "?", false);
+
+	var greenCircle = Object.create(Element);
+	greenCircle.init('greenCircle', 'img/green-circle.svg', true, true, false, false, "", "?", false);
+	
+	// function (name, urlImage, movable, combinable, zoomable, bagable, answer, message, inputable)
+	var bourges = Object.create(Element);
+	bourges.init('bourges', 'img/bourges.png', false, false, true, false, "", "Ce tableau représente la cathédrale de Bourges", false);
+
+	var bourgesuv = Object.create(Element);
+	bourgesuv.init('bourgesuv', 'img/bourgesuv.png', false, false, true, false, "6", "Ce tableau représente la cathédrale de Bourges", false);
+	
+	var doorLocked = Object.create(Element);
+	doorLocked.init('doorLocked', 'img/door-locked.svg', false, true, false, false, "", "Cette porte est fermée, il faudrait quelque chose pour l’ouvrir", false);
+	
+	var doorOpen = Object.create(Element);
+	doorOpen.init('doorOpen', 'img/door-open.svg', false, false, false, false, "", "La porte est ouverte!!!", false);
+	
+	var fireAlarm = Object.create(Element);
+	fireAlarm.init('fireAlarm', 'img/fire-alarm.svg', false, false, false, false, "", "Je ne peux pas passer, une alarme a été activée", false);
+		
+	var flashlight = Object.create(Element);
+	flashlight.init('flashlight', 'img/flashlight.svg', false, false, false, false, "", "On peut désactiver cette alarme grâce à un code couleur", true);
+		
 } ); // fermeture JQuery
 
