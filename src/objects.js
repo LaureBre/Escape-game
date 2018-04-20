@@ -14,15 +14,20 @@ $( function() {			// initialisation JQuery
 			this.inputable = inputable;
 			this.clue = clue;
 			this.message = message;
-			this.width = this.dom.width();
+			this.width = width;
 			this.height = this.dom.height();
+
 			this.dom.css('left', posLeft + "px");
 			this.dom.css('top', posTop + "px");
-			this.dom.width(width + "px");
-
+			this.dom.css('width', width + "px");
+			console.log(this.name + this.dom.width());
 			this.createHTML();
-
 			this.inBag();
+			// if (this.inputable == true) {
+			// 	this.input();
+   //          } else {
+   //              console.log("non plus");
+   //          }
 		},
 
 		createHTML: function() {
@@ -37,6 +42,7 @@ $( function() {			// initialisation JQuery
 			var thisdom = this.dom;
 			var thisname = this.name;
 			var thiswidth = this.width;
+			// console.log(thiswidth);
 			var thisheight = this.height;
 			var isInBag = false;
 
@@ -62,22 +68,6 @@ $( function() {			// initialisation JQuery
 			});
 		},
 
-		shiftPlace: function() {
-			var thisdom = this.dom;
-				if (this.draggable) {
-
-					if (this.isInInventory == true) {
-						thisdom.inScene();
-						console.log('inScene');
-					}
-					else {
-						this.inBag();
-						console.log('inBag');
-					}
-				}
-			},
-
-
         //tentative de fonction de zoom
         zoom: function () {
             if (this.zoomable) {
@@ -92,14 +82,13 @@ $( function() {			// initialisation JQuery
 
         //tentative de fonction d'input
         input: function () {
-            if (this.inputable) {
-                thisdom.click(function () {
-                    console.log("ok");
-                    prompt("please interact");
-                });
-            } else {
-                console.log("non plus");
-            }
+
+            var thisdom2 = this.dom;
+            thisdom2.css('border', '1pw solid red');
+            thisdom2.on('click', function () {
+                console.log("ok");
+                prompt("please interact");
+            });
         },
 
 
@@ -149,7 +138,7 @@ $( function() {			// initialisation JQuery
 	cigarette.init('cigarette', 'cigarette.svg', 500, 0, 150, true, true, false,  "", "Des cigarettes", false);
 
 	var coffeeMaker = Object.create(Element);
-	coffeeMaker.init('cigarette', 'coffee-maker.svg', 500, 0, 150, false, false, false,  "", "Une simple cafetière", false);
+	coffeeMaker.init('coffeeMaker', 'coffee-maker.svg', 500, 0, 150, false, false, false,  "", "Une simple cafetière", false);
 
 	var compteur = Object.create(Element);
 	compteur.init('compteur', 'compteur.png', 500, 0, 150, false, true, true,  "", "Il manque quelque chose pour faire fonctionner l'ascenseur", false);
@@ -199,7 +188,7 @@ $( function() {			// initialisation JQuery
 	fireAlarm.init('fireAlarm', 'fire-alarm.svg', 500, 0, 150, false, false, false,  "", "Je ne peux pas passer, une alarme a été activée", false);
 		
 	var flashlight = Object.create(Element);
-	flashlight.init('flashlight', 'flashlight.svg', 500, 0, 150, false, false, false,  "", "On peut désactiver cette alarme grâce à un code couleur", true);
+	flashlight.init('flashlight', 'flashlight.svg', 500, 500, 50, true, false, false,  "", "On peut désactiver cette alarme grâce à un code couleur", true);
 		
 } ); // fermeture JQuery
 
