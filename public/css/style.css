@@ -1,5 +1,5 @@
 .root {
-    overflow:hidden; 
+    overflow:hidden;
 }
 *
 {
@@ -7,36 +7,36 @@
     padding: 0;
 }
 
-body {     
-    width:1600px;     
-    height:100vh;    
-    margin: auto; 
-} 
+body {
+    width:1600px;
+    height:100vh;
+    margin: auto;
+}
 
-#scene {     
-    width:auto;     
-    height:90vh;         
-    overflow:hidden;     
-    background-image: url("../img/scene1.jpg");
+#scene {
+    width:auto;
+    height:90vh;
+    overflow:hidden;
+    background-image: url("../img/piece.jpeg");
     background-size: cover;
-} 
+}
 
 #background {
     width: 100%;
     height: auto;
 }
 
-#inventory {     
-    height:90vh;     
-    width:180px;       
-    float:right; 
-    background-color: violet;
+#inventory {
+    height:90vh;
+    width:180px;
+    float:right;
+    background-color: grey;
     display: flex;
-} 
-
-
-#story {   
-    background:#d3b8ae;   
-    min-height: 10vh; 
+    border: 5px solid black;
 }
 
+
+#story {
+    background:#d3b8ae;
+    min-height: 10vh;
+}
