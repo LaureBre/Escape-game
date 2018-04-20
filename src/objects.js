@@ -1,11 +1,10 @@
 $( function() {			// initialisation JQuery
 
-  	$( ".draggable" ).draggable();
 
   	var inventory = [];
 
 	var Element = {
-		init: function (name, urlImage, movable, combinable, zoomable, bagable, clue, inputable) {
+		init: function (name, urlImage, movable, combinable, zoomable, bagable, clue, message, inputable) {
 			this.name = name;
 			this.urlImage = urlImage;
 			this.dom = $('#'+name);
@@ -15,6 +14,7 @@ $( function() {			// initialisation JQuery
 			this.bagable = bagable;
 			this.inputable = inputable;
 			this.clue = clue;
+			this.message = message;
 			this.isInInventory = false;
 			// this.left = this.dom.offset().left;
 			// this.top = this.dom.offset().top;
@@ -62,7 +62,8 @@ $( function() {			// initialisation JQuery
 			});
 		},
 
-		shiftPlace: function() {
+		events: function() {
+			addEvents(this.name);
 			if (this.movable) {
 				if (this.isInInventory == true) {
 					this.inScene();
@@ -73,16 +74,12 @@ $( function() {			// initialisation JQuery
 			}
 		},
 
-		// addEvents: function() {
-
-		// }
-
         //tentative de fonction de zoom
         zoom: function () {
             if (this.zoomable) {
-                thisdom.click(function () {
+                this.dom.click(function () {
                     console.log("zooma");
-                    thisdom.width + 500;
+                    this.dom.width + 500;
                 });
             } else {
                 console.log("et ben non");
@@ -117,44 +114,63 @@ $( function() {			// initialisation JQuery
 
 	var tortue = Object.create(Element);
 
-	tortue.init('tortue', 'img/tortue.png', true, true, true, false, false, 'initiales');
+	tortue.init('tortue', 'img/tortue.png', true, true, true, false, false, 'une tortue !', 'initiales');
 	// tortue.imgSize();
+	tortue.events();
 
+	var cheese = Object.create(Element);
 
-	var tortue2 = Object.create(Element);
+	cheese.init('cheese', 'img/cheese.jpg', true, true, true, false, false, 'du fromage', 'initiales');
+	// cheese.imgSize();
+	cheese.events();
 
-	tortue2.init('tortue2', 'img/tortue.png', true, true, true, false, false, 'initiales');
-	// tortue2.imgSize();
+	function addEvents(element) {
+		var dom = $("#" + element); 
+		dom.on( "mouseup", function() {
+			shiftPlace(element);
+		} );
 
+		// element.dom.on( "mouseup", function() {
+		// 	element.shiftPlace();
+		// } );
+	}
 
-	// function addEvents(element) {
-	// 	element.dom.on( "mouseup", function() {
-	// 		element.shiftPlace();
-	// 	} );
+	function shiftPlace: () {
+			console.log(shiftPlace);
+			if (this.movable) {
+				if (this.isInInventory == true) {
+					this.inScene();
+					console.log('inScene');
+				}
+				else {
+					this.inBag();
+					console.log('inBag');
+				}
+			}
+		},
 
-	// 	element.dom.on( "mouseup", function() {
-	// 		element.shiftPlace();
-	// 	} );
+	// if (cheese.movable) {
+	// 	if (cheese.isInInventory == true) {
+	// 		cheese.inScene();
+	// 	}
+	// 	else {
+	// 		cheese.inBag();
+	// 	}
 	// }
 
 
-	if (tortue2.movable) {
-		if (tortue2.isInInventory == true) {
-			tortue2.inScene();
-		}
-		else {
-			tortue2.inBag();
-		}
-	}
+	// if (tortue.movable) {
+	// 	if (tortue.isInInventory == true) {
+	// 		tortue.inScene();
+	// 	}
+	// 	else {
+	// 		tortue.inBag();
+	// 	}
+	// }
 
 
-	if (tortue.movable) {
-		if (tortue.isInInventory == true) {
-			tortue.inScene();
-		}
-		else {
-			tortue.inBag();
-		}
-	}
-
+	// $().on('click', function () {
+	// 	$( ".draggable" ).draggable();
+	// });
 } ); // fermeture JQuery
+

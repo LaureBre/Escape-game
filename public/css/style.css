@@ -5,6 +5,7 @@
 {
     margin: 0;
     padding: 0;
+    font-family: 'Gugi', cursive;
 }
 
 body {
@@ -17,7 +18,7 @@ body {
     width:auto;
     height:90vh;
     overflow:hidden;
-    background-image: url("../img/piece.jpeg");
+    background-image: url("../img/room.png");
     background-size: cover;
 }
 
@@ -27,16 +28,37 @@ body {
 }
 
 #inventory {
+    position: relative;
     height:90vh;
     width:180px;
     float:right;
     background-color: grey;
     display: flex;
-    border: 5px solid black;
+    /*border: 5px solid black;*/
 }
 
+    #menu {
+        position: absolute;
+        bottom: 0;
+        width: 180px;
+        display: flex;
+    }
+    
+    #menu div {
+        margin: 12px;
+        padding: 10px;
+        width: 50px;
+        background-color: white;
+        border-radius: 50%;
+    }
+
+    #loupe {
+        /*right: 0;*/
+    }
 
 #story {
-    background:#d3b8ae;
+    background: black;
     min-height: 10vh;
+    padding: 10px;
+    color: white;
 }
