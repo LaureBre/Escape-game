@@ -1,0 +1,42 @@
+.root {
+    overflow:hidden; 
+}
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body {     
+    width:1600px;     
+    height:100vh;    
+    margin: auto; 
+} 
+
+#scene {     
+    width:auto;     
+    height:90vh;         
+    overflow:hidden;     
+    background-image: url("../img/scene1.jpg");
+    background-size: cover;
+} 
+
+#background {
+    width: 100%;
+    height: auto;
+}
+
+#inventory {     
+    height:90vh;     
+    width:180px;       
+    float:right; 
+    background-color: violet;
+    display: flex;
+} 
+
+
+#story {   
+    background:#d3b8ae;   
+    min-height: 10vh; 
+}
+
