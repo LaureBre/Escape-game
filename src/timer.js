@@ -1,15 +1,16 @@
-$( function() {
+var countdown = 30 * 60 * 1000;
+var timerId = setInterval(function(){
+  countdown -= 1000;
+  var min = Math.floor(countdown / (60 * 1000));
+  //var sec = Math.floor(countdown - (min * 60 * 1000));  // wrong
+  var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);  //correct
 
-    function setDate() {
-        var now = new Date();
-        console.log(now);
-        var target = new Date(now);
-        target.setMinutes(now.getMinutes() + 30);
-        console.log(target);
-        var diff = dateDiff('now', 'target', 'hh:ii');
-        console.log(diff);
-    }
+  if (countdown <= 0) {
+     alert("30 min!");
+     clearInterval(timerId);
+     //doSomething();
+  } else {
+     $("#countTime").html("Il reste " + min + " minutes et " + sec + " secondes");
+  }
 
-    setDate();
-
-});
+}, 1000); //1000ms. = 1sec.
