@@ -30,7 +30,7 @@ $( function() {			// initialisation JQuery
 					inventory.push(thisname);
 					console.log(inventory);
 			    }
-			}); 
+			});
 		}
 	};
 
@@ -38,6 +38,7 @@ $( function() {			// initialisation JQuery
 
 	tortue.init('tortue', 'img/tortue.png', true, true, true, false, false, 'initiales');
 	tortue.divSize();
+
 
   	if (tortue.movable) {
 		tortue.inBag();
