@@ -5,6 +5,7 @@
 	<title>Escape Game by Tulipe</title>
     <link rel="stylesheet" href="public/css/elements.css">
 	<link rel="stylesheet" href="public/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet"> 
 </head>
 
 <body>
@@ -14,11 +15,16 @@
 
 	<main>
 		<aside id="inventory">
-			<img src="public/img/tortue.jpg" class="draggable element" id="tortue">
-			<img src="public/img/tortue.jpg" class="draggable element" id="tortue2">
+			<div id="menu">
+				<div>
+					<img src="public/img/drag.svg" id="drag" class="menu">
+				</div>
+				<div>
+					<img src="public/img/loupe.svg" id="loupe" class="menu">
+				</div>
+			</div>
 		</aside>
 		<div id="scene">
-
 		</div>
 	</main>
 
@@ -33,7 +39,8 @@
   	<script src="librairies/jquery/jquery.min.js"></script>
   	<script src="librairies/jquery/jquery-ui.min.js"></script>
 	<script src="src/objects.js"></script>
-	<script src="src/timer.js"></script>
+	<script src="public/js/script.js"></script>
+	<!-- <script src="src/timer.js"></script> -->
 
 </body>
 </html>

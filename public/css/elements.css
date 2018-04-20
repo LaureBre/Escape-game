@@ -1,6 +1,7 @@
 .element {
 	position: absolute;
 	border: none;
+	max-width: 400px;
 }
 
 .slot {
@@ -12,7 +13,7 @@
     z-index: 10;
 }
 
-#tortue, #tortue2 {
+#banana, #cheese {
 	width: 250px;
 	top: 500px;
 	left: 200px;
